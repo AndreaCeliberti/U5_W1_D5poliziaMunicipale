@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using U5_W1_D5poliziaMunicipale.Models.Entities;
 using U5_W1_D5poliziaMunicipale.Services;
 
 namespace U5_W1_D5poliziaMunicipale.Controllers
@@ -11,8 +12,9 @@ namespace U5_W1_D5poliziaMunicipale.Controllers
             _violazioneService = violazioneService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<Violazione> violazioni = await _violazioneService.GetViolazioniAsync();
             return View();
         }
     }
