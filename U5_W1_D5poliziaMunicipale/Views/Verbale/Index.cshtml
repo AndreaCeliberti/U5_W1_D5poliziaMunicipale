@@ -1,0 +1,44 @@
+﻿@model List<VerbaleViewModel>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Verbale";
+}
+
+<h1>Elenco verbali stilati</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <h4>Non sono presenti verbali registrati</h4>
+}
+else
+{
+    <table class="table">
+        <caption>Elenco dei verbali</caption>
+        <thead>
+            <tr>
+                <th scope="col">Nome Agente</th>
+                <th scope="col">Data violazione</th>
+                <th scope="col">Data trascrizione</th>
+                <th scope="col">Indirizzo violazione</th>
+                <th scope="col">Importo contravvenzione</th>
+                <th scope="col">Ammontare punti decurtati</th>
+                <th scope="col">Tipo di Infrazione</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var verbale in Model)
+            {
+                <tr>
+                    <td>@verbale.NominativoAgente</td>
+                    <td>@(verbale.DataViolazione is DateTime dv ? dv.ToString("dd/MM/yyyy") : verbale.DataViolazione.ToString())</td>
+                    <td>@(verbale.DataTrascrizione is DateTime dt ? dt.ToString("dd/MM/yyyy") : verbale.DataTrascrizione.ToString())</td>
+                    <td>@verbale.IndirizzoViolazione</td>
+                    <td>@(verbale.ImportoMulta is decimal im ? im.ToString("C") : verbale.ImportoMulta.ToString())</td>
+                    <td>@verbale.DecurtazionePunti</td>
+                    <td>@verbale.Violazione</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

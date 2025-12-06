@@ -16,7 +16,7 @@ namespace U5_W1_D5poliziaMunicipale.Controllers
         {
             List<Anagrafica> anagrafiche = await _anagraficaService.GetAnagraficheAsync();
 
-            List<AnagraficaViewModel> anagraficaViewModels = anagrafiche.Select(a => new AnagraficaViewModel()
+            List<AnagraficaViewModel> anagraficaViewModel = anagrafiche.Select(a => new AnagraficaViewModel()
             {
                  AnagraficaId = a.AnagraficaId,
                  Nome = a.Nome,
@@ -28,7 +28,26 @@ namespace U5_W1_D5poliziaMunicipale.Controllers
                  Verbale = a.Verbale.Violazione.DescrizioneViolazione,
             }
             ).ToList();
-            return View();
+            return View(anagraficaViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSave(AnagraficaViewModel anagraficaViewModel)
+        {
+            Anagrafica anagrafica = new Anagrafica()
+            {
+                AnagraficaId = Guid.NewGuid(),
+                Nome = anagraficaViewModel.Nome,
+                Cognome = anagraficaViewModel.Cognome,
+                CodiceFiscale = anagraficaViewModel.CodiceFiscale,
+                Indirizzo = anagraficaViewModel.Indirizzo,
+                Citta = anagraficaViewModel.Citta,
+                Cap = anagraficaViewModel.Cap,
+
+            };
+            await _anagraficaService.CreateAnagraficaAsync( anagrafica );   
+            return RedirectToAction("Create");
+
         }
     }
 }

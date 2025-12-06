@@ -16,6 +16,10 @@ namespace U5_W1_D5poliziaMunicipale.Services
                 Include(ve => ve.Verbale).ThenInclude(vi => vi.Violazione).ToListAsync();
                 return anagrafiche;
             }
-        
+        public async Task<bool> CreateAnagraficaAsync (Anagrafica anagrafica)
+        {
+             _multeDbContext.Anagrafiche.Add(anagrafica);
+            return await SaveAsync();
+        }
     }
 }
