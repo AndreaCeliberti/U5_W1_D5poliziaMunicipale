@@ -1,44 +1,46 @@
-﻿@model List<VerbaleViewModel>
-@using System.Linq
+﻿@model IEnumerable<U5_W1_D5poliziaMunicipale.ViewModels.VerbaleViewModel>
 
 @{
-    ViewBag.Title = "Verbale";
+    ViewBag.Title = "Elenco Verbali";
 }
 
-<h1>Elenco verbali stilati</h1>
+<h2>Elenco Verbali</h2>
 
-@if (Model == null || !Model.Any())
-{
-    <h4>Non sono presenti verbali registrati</h4>
-}
-else
-{
-    <table class="table">
-        <caption>Elenco dei verbali</caption>
-        <thead>
-            <tr>
-                <th scope="col">Nome Agente</th>
-                <th scope="col">Data violazione</th>
-                <th scope="col">Data trascrizione</th>
-                <th scope="col">Indirizzo violazione</th>
-                <th scope="col">Importo contravvenzione</th>
-                <th scope="col">Ammontare punti decurtati</th>
-                <th scope="col">Tipo di Infrazione</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var verbale in Model)
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Agente</th>
+            <th>Data Violazione</th>
+            <th>Data Trascrizione</th>
+            <th>Indirizzo</th>
+            <th>Importo Multa</th>
+            <th>Decurtazione Punti</th>
+            <th>Violazione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var verbale in Model)
             {
                 <tr>
                     <td>@verbale.NominativoAgente</td>
-                    <td>@(verbale.DataViolazione is DateTime dv ? dv.ToString("dd/MM/yyyy") : verbale.DataViolazione.ToString())</td>
-                    <td>@(verbale.DataTrascrizione is DateTime dt ? dt.ToString("dd/MM/yyyy") : verbale.DataTrascrizione.ToString())</td>
+                    <td>@verbale.DataViolazione.ToString("dd/MM/yyyy")</td>
+                    <td>@verbale.DataTrascrizione.ToString("dd/MM/yyyy")</td>
                     <td>@verbale.IndirizzoViolazione</td>
-                    <td>@(verbale.ImportoMulta is decimal im ? im.ToString("C") : verbale.ImportoMulta.ToString())</td>
+                    <td>@verbale.ImportoMulta.ToString("C")</td>
                     <td>@verbale.DecurtazionePunti</td>
-                    <td>@verbale.Violazione</td>
+                    <td>@(!string.IsNullOrEmpty(verbale.Violazione) ? verbale.Violazione : "-")</td>
                 </tr>
             }
-        </tbody>
-    </table>
-}
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">Nessun verbale presente</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Verbale" asp-action="Create">Nuovo Verbale</a>

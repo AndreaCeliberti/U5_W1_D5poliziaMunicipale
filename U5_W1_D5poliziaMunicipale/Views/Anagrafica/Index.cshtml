@@ -1,19 +1,13 @@
 ﻿@model List<AnagraficaViewModel>
 
 @{
-    ViewBag.Title = "Anagrafica";
+    ViewBag.Title = "Elenco Anagrafica";
 }
 
-<h1>Anagrafica persone multate</h1>
+<h1>Elenco Anagrafica persone multate</h1>
 
-@if(Model.Count == 0)
-{
-    <h4>Non sono presenti persone registrate</h4>
-}
-else
-{
-    @foreach (AnagraficaViewModel anagrafica in Model)
-    {
+
+   
         <table class="table">
             <thead>
                 <tr>
@@ -27,16 +21,29 @@ else
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>@anagrafica.Nome</td>
-                    <td>@anagrafica.Cognome</td>
-                    <td>@anagrafica.CodiceFiscale</td>
-                    <td>@anagrafica.Indirizzo</td>
-                    <td>@anagrafica.Citta</td>
-                    <td>@anagrafica.Cap</td>
-                    <td>@anagrafica.Verbale</td>
-                </tr>
+                @if (Model != null && Model.Any())
+                {
+                      @foreach (AnagraficaViewModel anagrafica in Model)
+                        {
+                           <tr>
+                                <td>@anagrafica.Nome</td>
+                                 <td>@anagrafica.Cognome</td>
+                                 <td>@anagrafica.CodiceFiscale</td>
+                                 <td>@anagrafica.Indirizzo</td>
+                                 <td>@anagrafica.Citta</td>
+                                 <td>@anagrafica.Cap</td>
+                                 <td>@anagrafica.Verbale</td>
+                           </tr>
+                         }
+                      }
+                     else
+                     {
+                    <tr>
+                        <td colspan="7" class="text-center">Nessuna anagrafica presente</td>
+                   </tr>
+                 }
             </tbody>
         </table>
-    }
-}
+    
+<a class="btn btn-primary" asp-controller="Anagrafica" asp-action="Create">Inserisci Anagrafica</a>
+

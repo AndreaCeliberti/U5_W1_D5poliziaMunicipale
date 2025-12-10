@@ -1,0 +1,63 @@
+﻿@model U5_W1_D5poliziaMunicipale.ViewModels.VerbaleViewModel
+
+@{
+    ViewBag.Title = "Inserisci Nuovo Verbale";
+}
+
+<h2>Inserisci Nuovo Verbale</h2>
+
+<section>
+    <form asp-controller="Verbale" asp-action="CreateSave" method="post">
+        <div class="form-group mb-3">
+            <label asp-for="NominativoAgente" class="control-label"></label>
+            <input asp-for="NominativoAgente" class="form-control" />
+            <span asp-validation-for="NominativoAgente" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="DataViolazione" class="control-label"></label>
+            <input asp-for="DataViolazione" class="form-control" type="date" />
+            <span asp-validation-for="DataViolazione" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="DataTrascrizione" class="control-label"></label>
+            <input asp-for="DataTrascrizione" class="form-control" type="date" />
+            <span asp-validation-for="DataTrascrizione" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="IndirizzoViolazione" class="control-label"></label>
+            <input asp-for="IndirizzoViolazione" class="form-control" />
+            <span asp-validation-for="IndirizzoViolazione" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="ImportoMulta" class="control-label"></label>
+            <input asp-for="ImportoMulta" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="ImportoMulta" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="DecurtazionePunti" class="control-label"></label>
+            <input asp-for="DecurtazionePunti" class="form-control" type="number" />
+            <span asp-validation-for="DecurtazionePunti" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Violazione" class="form-label">Violazione</label>
+            <select asp-for="Violazione" asp-items="Model.ListaViolazioni" class="form-control">
+                <option value="">-- Seleziona una violazione --</option>
+            </select>
+            <span asp-validation-for="Violazione" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salva</button>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

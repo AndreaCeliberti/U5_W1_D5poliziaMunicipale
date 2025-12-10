@@ -1,4 +1,4 @@
-﻿@model U5_W1_D5poliziaMunicipale.Models.Entities.Anagrafica
+﻿@model U5_W1_D5poliziaMunicipale.ViewModels.AnagraficaViewModel
 
 @{
     ViewBag.Title = "Inserisci Nuova Anagrafica";
@@ -37,6 +37,13 @@
             <label asp-for="Cap" class="control-label"></label>
             <input asp-for="Cap" class="form-control">
             <span asp-validation-for="Cap" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Verbale" class="form-label">Verbale</label>
+            <select asp-for="Verbale" asp-items="Model.ListaVerbali" class="form-control">
+                <option value="">-- Seleziona una violazione --</option>
+            </select>
+            <span asp-validation-for="Verbale" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>

@@ -14,5 +14,16 @@ namespace U5_W1_D5poliziaMunicipale.Services
             Include(vi => vi.Violazione).ToListAsync();
             return verbali;
         }
+        public async Task<bool> CreateVerbaleAsync(Verbale verbale)
+        {
+            _multeDbContext.Verbali.Add(verbale);
+            return await SaveAsync();
+        }
+
+        public async Task<Violazione?> GetViolazioneByDescrizioneAsync(string descrizione)
+        {
+            return await _multeDbContext.Violazioni
+                .FirstOrDefaultAsync(v => v.DescrizioneViolazione == descrizione);
+        }
     }
 }

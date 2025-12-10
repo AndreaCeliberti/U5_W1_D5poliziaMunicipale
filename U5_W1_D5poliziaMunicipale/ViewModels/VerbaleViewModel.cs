@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace U5_W1_D5poliziaMunicipale.ViewModels
 {
     public class VerbaleViewModel
@@ -20,5 +22,7 @@ namespace U5_W1_D5poliziaMunicipale.ViewModels
         public int DecurtazionePunti { get; set; }
         
         public string Violazione { get; set; }
+
+        public IEnumerable<SelectListItem> ListaViolazioni { get; set; }
     }
 }
